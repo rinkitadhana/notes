@@ -1,26 +1,129 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --panel: #f8f8f7;
+  --surface: #ffffff;
+  --fg: #37352f;
+  --muted: #787774;
+  --faint: #a5a29c;
+  --line: #e9e9e7;
+  --hover: rgba(55, 53, 47, 0.06);
+  --active: rgba(55, 53, 47, 0.1);
+  --accent: #2383e2;
+  --accent-soft: rgba(35, 131, 226, 0.12);
+  --ok: #2383e2;
+  --danger: #e03e3e;
+  --shadow: 0 0 0 1px rgba(15, 15, 15, 0.05), 0 3px 6px rgba(15, 15, 15, 0.1), 0 9px 24px rgba(15, 15, 15, 0.2);
+}
+
+.dark {
+  --bg: #191919;
+  --panel: #202020;
+  --surface: #252525;
+  --fg: rgba(255, 255, 255, 0.86);
+  --muted: #9b9b9b;
+  --faint: #6b6b6b;
+  --line: #2f2f2f;
+  --hover: rgba(255, 255, 255, 0.055);
+  --active: rgba(255, 255, 255, 0.09);
+  --accent: #529cca;
+  --accent-soft: rgba(82, 156, 202, 0.16);
+  --ok: #529cca;
+  --danger: #ff6b6b;
+  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 3px 6px rgba(0, 0, 0, 0.4), 0 9px 24px rgba(0, 0, 0, 0.5);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-hover: var(--hover);
+  --color-active: var(--active);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --shadow-card: var(--shadow);
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial,
+    sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+/* ---------- editor (BlockNote) ---------- */
+.bn-container[data-color-scheme] {
+  --bn-colors-editor-background: transparent;
+  --bn-colors-editor-text: var(--fg);
+  --bn-font-family: var(--font-sans);
+  --bn-colors-menu-background: var(--surface);
+  --bn-colors-menu-text: var(--fg);
+  --bn-colors-tooltip-background: var(--surface);
+  --bn-colors-hovered-background: var(--hover);
+  --bn-colors-selected-background: var(--active);
+  --bn-colors-side-menu: var(--faint);
+  --bn-colors-border: var(--line);
+}
+
+.bn-container,
+.bn-container .bn-editor {
+  background: transparent !important;
+}
+
+.bn-editor {
+  padding-inline: 54px !important;
+  padding-bottom: 35vh;
+}
+
+.bn-container input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+.bn-block-content {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* ---------- small animations ---------- */
+@keyframes pop {
+  from { transform: translateY(2px) scale(0.98); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.animate-pop {
+  animation: pop 140ms ease-out;
+}
+
+@keyframes check {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+.animate-check {
+  animation: check 220ms ease-out;
 }
