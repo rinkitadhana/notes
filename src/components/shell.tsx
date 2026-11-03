@@ -184,7 +184,7 @@ function Sidebar() {
           href="/"
           className={cn(
             "flex h-7 items-center gap-2 rounded px-2 transition-colors hover:bg-hover",
-            pathname === "/" && "bg-active font-medium text-fg",
+            pathname === "/" && "bg-active text-fg",
           )}
         >
           <span className="flex w-5 justify-center">
@@ -192,15 +192,6 @@ function Sidebar() {
           </span>
           Home
         </Link>
-        <button
-          onClick={() => newNote()}
-          className="flex h-7 w-full items-center gap-2 rounded px-2 text-left transition-colors hover:bg-hover"
-        >
-          <span className="flex w-5 justify-center">
-            <Plus size={16} />
-          </span>
-          New note
-        </button>
       </nav>
 
       <div className="mt-4 flex-1 overflow-y-auto px-1.5 pb-4">
@@ -234,14 +225,6 @@ function Sidebar() {
           </div>
         )}
         {tree.error && <p className="px-2 py-1 text-xs text-danger">Can&apos;t reach MongoDB. Is it running?</p>}
-        {!tree.isLoading && !tree.error && roots.length === 0 && (
-          <button
-            onClick={() => newNote()}
-            className="w-full rounded px-2 py-1 text-left text-faint hover:bg-hover"
-          >
-            No notes yet — create one
-          </button>
-        )}
 
         {roots.map((p) => (
           <NoteRow key={p.id} page={p} depth={0} tree={tree} activeId={activeId} expanded={expanded} toggle={toggle} open={open} />
@@ -355,7 +338,7 @@ function NoteRow({
           if (id && z) drop(id, z);
         }}
         className={cn(
-          "group relative flex h-7 items-center gap-1 rounded pr-1 transition-colors hover:bg-hover",
+          "group relative mb-0.5 flex h-7 items-center gap-1 rounded pr-1 transition-colors hover:bg-hover",
           active && "bg-active text-fg",
           zone === "inside" && "bg-accent-soft",
         )}
@@ -371,7 +354,7 @@ function NoteRow({
           <span className="flex w-5 shrink-0 justify-center text-[15px] leading-none">
             {page.icon || <FileText size={15} className="text-muted" />}
           </span>
-          <span className={cn("truncate", active && "font-medium", !page.title && "text-faint")}>
+          <span className={cn("truncate", !page.title && "text-faint")}>
             {page.title || "Untitled"}
           </span>
         </Link>

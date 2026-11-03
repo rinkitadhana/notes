@@ -52,7 +52,7 @@ export function HomeScreen() {
                 ))}
                 <button
                   onClick={() => newNote()}
-                  className="flex h-[136px] w-[148px] shrink-0 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-line text-sm text-muted transition-colors hover:bg-hover hover:text-fg"
+                  className="flex h-[136px] w-[148px] shrink-0 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-line text-sm text-muted"
                 >
                   <Plus size={20} />
                   New note
@@ -107,7 +107,7 @@ function NoteCard({ page }: { page: PageMeta }) {
   return (
     <Link
       href={`/notes/${page.id}`}
-      className="group relative flex h-[136px] w-[148px] shrink-0 flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-md"
+      className="group relative flex h-[136px] w-[148px] shrink-0 flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
     >
       <div className="h-11 shrink-0 bg-panel" />
       <div className="absolute left-3 top-6 flex h-8 w-8 items-center justify-center text-[26px] leading-none">
